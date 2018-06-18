@@ -1,0 +1,747 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Genesis Testwork",
+    "version": "1.0.0",
+    "title": "Genesis Testwork"
+  },
+  "host": "localhost",
+  "basePath": "/rest",
+  "tags": [
+    {
+      "name": "artists"
+    },
+    {
+      "name": "albums"
+    },
+    {
+      "name": "tracks"
+    },
+    {
+      "name": "genres"
+    },
+    {
+      "name": "favorites"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/artists": {
+      "post": {
+        "tags": [
+          "artists"
+        ],
+        "summary": "Create new an artist",
+        "operationId": "addArtist",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Artist object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Artist"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "artists"
+        ],
+        "summary": "Get list of artists",
+        "operationId": "getListArtists",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/artists/{id}": {
+      "get": {
+        "tags": [
+          "artists"
+        ],
+        "summary": "Find artist by id",
+        "operationId": "getArtistById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of artist to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Artist"
+            }
+          },
+          "404": {
+            "description": "Artist not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "artists"
+        ],
+        "summary": "Delete artist by id",
+        "operationId": "deleteArtistById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of artist to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "Artist not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "artists"
+        ],
+        "summary": "Update artist by id",
+        "operationId": "patchArtistById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of artist to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Artist"
+            }
+          },
+          "404": {
+            "description": "Artist not found"
+          }
+        }
+      }
+    },
+    "/albums": {
+      "post": {
+        "tags": [
+          "albums"
+        ],
+        "summary": "Create new an album",
+        "operationId": "addAlbum",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Album object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Album"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "albums"
+        ],
+        "summary": "Get list of albums",
+        "operationId": "getListAlbums",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/albums/{id}": {
+      "get": {
+        "tags": [
+          "albums"
+        ],
+        "summary": "Find album by id",
+        "description": "Returns a single album",
+        "operationId": "getAlbumById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of album to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Album"
+            }
+          },
+          "404": {
+            "description": "Album not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "albums"
+        ],
+        "summary": "Delete album by id",
+        "operationId": "deleteAlbumById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of album to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "Album not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "albums"
+        ],
+        "summary": "Update album by id",
+        "operationId": "patchAlbumById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of album to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Album"
+            }
+          },
+          "404": {
+            "description": "Album not found"
+          }
+        }
+      }
+    },
+    "/tracks": {
+      "post": {
+        "tags": [
+          "tracks"
+        ],
+        "summary": "Create new an track",
+        "operationId": "addTrack",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Track object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Track"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "tracks"
+        ],
+        "summary": "Get list of tracks",
+        "operationId": "getListTracks",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/tracks/{id}": {
+      "get": {
+        "tags": [
+          "tracks"
+        ],
+        "summary": "Find track by id",
+        "description": "Returns a single track",
+        "operationId": "geTrackById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of track to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Track"
+            }
+          },
+          "404": {
+            "description": "Track not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "tracks"
+        ],
+        "summary": "Delete track by id",
+        "operationId": "deleteTrackById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of track to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "Track not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "tracks"
+        ],
+        "summary": "Update track by id",
+        "operationId": "patchTrackById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of track to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Track"
+            }
+          },
+          "404": {
+            "description": "Track not found"
+          }
+        }
+      }
+    },
+    "/genres": {
+      "post": {
+        "tags": [
+          "genres"
+        ],
+        "summary": "Create new an genre",
+        "operationId": "addGenre",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Genre object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Genre"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "genres"
+        ],
+        "summary": "Get list of genres",
+        "operationId": "getListGenres",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/genres/{id}": {
+      "get": {
+        "tags": [
+          "genres"
+        ],
+        "summary": "Find genre by id",
+        "description": "Returns a single genre",
+        "operationId": "geGenreById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of genre to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Genre"
+            }
+          },
+          "404": {
+            "description": "Genre not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "genres"
+        ],
+        "summary": "Delete genre by id",
+        "operationId": "deleteGenreById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of genre to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "Genre not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "genres"
+        ],
+        "summary": "Update genre by id",
+        "operationId": "patchGenreById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of genre to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Genre"
+            }
+          },
+          "404": {
+            "description": "Genre not found"
+          }
+        }
+      }
+    },
+    "/artists/{id}/favorites": {
+      "put": {
+        "tags": [
+          "favorites"
+        ],
+        "summary": "Add artist to favorites list by id",
+        "operationId": "addArtistFavorites",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of artist for adding to favorites list",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "Artist not found"
+          }
+        }
+      }
+    },
+    "/albums/{id}/favorites": {
+      "put": {
+        "tags": [
+          "favorites"
+        ],
+        "summary": "Add album to favorites list by id",
+        "operationId": "addAlbumFavorites",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of album for adding to favorites list",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "Album not found"
+          }
+        }
+      }
+    },
+    "/tracks/{id}/favorites": {
+      "put": {
+        "tags": [
+          "favorites"
+        ],
+        "summary": "Add track to favorites list by id",
+        "operationId": "addTrackFavorites",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of track for adding to favorites list",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "Track not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Artist": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Album": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Track": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Genre": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

@@ -1,0 +1,46 @@
+version: '3.3'
+services:
+  elasticsearch:
+    image: elasticsearch
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+  kibana:
+    image: kibana
+    ports:
+      - 5601:5601
+    links:
+      - elasticsearch
+  web-php:
+    build:
+      context: ./docker/php
+    image: genesis/php-apache/7.1:v1
+    ports:
+      - "80:80"
+    volumes:
+      - ./app/basic:/var/www/html
+      - ./docker/php/etc/entrypoint.sh:/entrypoint.sh:ro
+    working_dir: /var/www/html
+    links:
+      - db
+      - elasticsearch
+  swagger:
+    image: swaggerapi/swagger-ui
+    volumes:
+      - ./app/swagger:/app/swagger
+    environment:
+      SWAGGER_JSON: /app/swagger/swagger.json
+    ports:
+      - "8080:8080"
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_DATABASE: genesis
+    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
