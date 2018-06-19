@@ -11,10 +11,17 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'album' => \app\modules\album\Album::class,
+        'artist' => \app\modules\artist\Artist::class,
+        'genre' => \app\modules\genre\Genre::class,
+        'track' => \app\modules\track\Track::class,
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'g3R"/Q!{%4<&]3cpk^<}=m_',
+            'baseUrl' => '',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -43,14 +50,16 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
+            'enableStrictParsing' => true,
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'site/index',
+                'login' => 'site/login',
+                'logout' => 'site/logout',
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
