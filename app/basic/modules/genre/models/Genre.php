@@ -3,6 +3,7 @@
 namespace app\modules\genre\models;
 
 use app\modules\track\models\Track;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%genre}}".
@@ -25,13 +26,22 @@ class Genre extends \yii\db\ActiveRecord
     }
 
     /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class,
+        ];
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['name', 'created_at', 'updated_at'], 'required'],
-            [['created_at', 'updated_at'], 'integer'],
+            [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
         ];
     }
@@ -56,5 +66,26 @@ class Genre extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Track::class, ['id' => 'track_id'])
             ->viaTable('{{%track_genre}}', ['genre_id' => 'id']);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        return [
+            'id',
+            'name',
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        return [
+            'tracks',
+        ];
     }
 }

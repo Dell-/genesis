@@ -2,15 +2,13 @@
 
 namespace app\controllers;
 
+use app\models\LoginForm;
 use Yii;
-use yii\captcha\CaptchaAction;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\ErrorAction;
 use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 
 class SiteController extends Controller
 {
@@ -48,10 +46,6 @@ class SiteController extends Controller
         return [
             'error' => [
                 'class' => ErrorAction::class,
-            ],
-            'captcha' => [
-                'class' => CaptchaAction::class,
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
     }

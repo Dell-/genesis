@@ -4,6 +4,7 @@ namespace app\modules\artist\models;
 
 use app\modules\album\models\Album;
 use app\modules\track\models\Track;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%artist}}".
@@ -28,13 +29,22 @@ class Artist extends \yii\db\ActiveRecord
     }
 
     /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class,
+        ];
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['firstname', 'lastname', 'created_at', 'updated_at'], 'required'],
-            [['created_at', 'updated_at'], 'integer'],
+            [['firstname', 'lastname'], 'required'],
             [['firstname', 'lastname'], 'string', 'max' => 200],
         ];
     }
@@ -69,5 +79,28 @@ class Artist extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Track::class, ['id' => 'track_id'])
             ->viaTable('{{%artist_track}}', ['artist_id' => 'id']);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        return [
+            'id',
+            'firstname',
+            'lastname',
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        return [
+            'albums',
+            'tracks',
+        ];
     }
 }
