@@ -1,9 +1,12 @@
 <?php
+declare(strict_types = 1);
 
 namespace app\models;
 
+use app\spi\UserInterface;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
@@ -16,7 +19,7 @@ use yii\web\IdentityInterface;
  * @property int $created_at
  * @property int $updated_at
  */
-class User extends \yii\db\ActiveRecord implements IdentityInterface
+class User extends ActiveRecord implements IdentityInterface, UserInterface
 {
     /**
      * {@inheritdoc}
@@ -71,9 +74,20 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      * @param string $username
      * @return static|null
      */
-    public static function findByUsername($username)
+    public static function findByUsername(string $username)
     {
         return static::findOne(['username' => $username]);
+    }
+
+    /**
+     * Finds user by username
+     *
+     * @param int $id
+     * @return static|null
+     */
+    public static function findById(int $id)
+    {
+        return static::findOne(['id' => $id]);
     }
 
     /**
@@ -81,7 +95,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id]);
+        return static::findById((int) $id);
     }
 
     /**
@@ -95,9 +109,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function getId()
+    public function getId(): int
     {
-        return $this->getPrimaryKey();
+        return (int) $this->getPrimaryKey();
     }
 
     /**

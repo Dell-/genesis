@@ -48,7 +48,7 @@
             "description": "Artist object",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Artist"
+              "$ref": "#/definitions/ArtistRequest"
             }
           }
         ],
@@ -69,6 +69,36 @@
         ],
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "fields",
+            "description": "Fields name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "expand",
+            "description": "Relation name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "description": "(-|+)<field-name>",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "per-page",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "string"
+          }
         ],
         "responses": {
           "405": {
@@ -154,6 +184,15 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Artist object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtistRequest"
+            }
           }
         ],
         "responses": {
@@ -210,6 +249,36 @@
         ],
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "fields",
+            "description": "Fields name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "expand",
+            "description": "Relation name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "description": "(-|+)<field-name>",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "per-page",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "string"
+          }
         ],
         "responses": {
           "405": {
@@ -296,6 +365,15 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Artist object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlbumRequest"
+            }
           }
         ],
         "responses": {
@@ -352,6 +430,36 @@
         ],
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "fields",
+            "description": "Fields name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "expand",
+            "description": "Relation name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "description": "(-|+)<field-name>",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "per-page",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "string"
+          }
         ],
         "responses": {
           "405": {
@@ -438,6 +546,15 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Artist object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrackRequest"
+            }
           }
         ],
         "responses": {
@@ -494,6 +611,36 @@
         ],
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "fields",
+            "description": "Fields name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "expand",
+            "description": "Relation name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "description": "(-|+)<field-name>",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "per-page",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "string"
+          }
         ],
         "responses": {
           "405": {
@@ -580,6 +727,15 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Artist object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenreRequest"
+            }
           }
         ],
         "responses": {
@@ -694,9 +850,22 @@
           "type": "integer",
           "format": "int64"
         },
-        "name": {
-          "type": "integer",
-          "format": "int64"
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        }
+      }
+    },
+    "ArtistRequest": {
+      "type": "object",
+      "properties": {
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
         }
       }
     },
@@ -708,8 +877,15 @@
           "format": "int64"
         },
         "name": {
-          "type": "integer",
-          "format": "int64"
+          "type": "string"
+        }
+      }
+    },
+    "AlbumRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
         }
       }
     },
@@ -721,8 +897,15 @@
           "format": "int64"
         },
         "name": {
-          "type": "integer",
-          "format": "int64"
+          "type": "string"
+        }
+      }
+    },
+    "TrackRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
         }
       }
     },
@@ -734,8 +917,15 @@
           "format": "int64"
         },
         "name": {
-          "type": "integer",
-          "format": "int64"
+          "type": "string"
+        }
+      }
+    },
+    "GenreRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
         }
       }
     }

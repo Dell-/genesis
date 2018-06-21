@@ -1,30 +1,31 @@
 <?php
 
-namespace app\modules\album\models;
+namespace app\models;
 
-use app\modules\artist\models\Artist;
-use app\modules\track\models\Track;
+use app\spi\FavoriteInterface;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "{{%album}}"
+ * This is the model class for table "{{%artist}}".
  *
  * @property int $id
- * @property string $name
+ * @property string $firstname
+ * @property string $lastname
  * @property int $created_at
  * @property int $updated_at
  *
- * @property Artist[] $artists
+ * @property Album[] $albums
  * @property Track[] $tracks
  */
-class Album extends \yii\db\ActiveRecord
+class Artist extends ActiveRecord implements FavoriteInterface
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{%album}}';
+        return '{{%artist}}';
     }
 
     /**
@@ -43,8 +44,8 @@ class Album extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['name'], 'string', 'max' => 255],
+            [['firstname', 'lastname'], 'required'],
+            [['firstname', 'lastname'], 'string', 'max' => 200],
         ];
     }
 
@@ -55,7 +56,8 @@ class Album extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'firstname' => 'Firstname',
+            'lastname' => 'Lastname',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -64,10 +66,10 @@ class Album extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getArtists()
+    public function getAlbums()
     {
-        return $this->hasMany(Artist::class, ['id' => 'artist_id'])
-            ->viaTable('{{%artist_album}}', ['album_id' => 'id']);
+        return $this->hasMany(Album::class, ['id' => 'album_id'])
+            ->viaTable('{{%artist_album}}', ['artist_id' => 'id']);
     }
 
     /**
@@ -76,7 +78,7 @@ class Album extends \yii\db\ActiveRecord
     public function getTracks()
     {
         return $this->hasMany(Track::class, ['id' => 'track_id'])
-            ->viaTable('{{%track_album}}', ['album_id' => 'id']);
+            ->viaTable('{{%artist_track}}', ['artist_id' => 'id']);
     }
 
     /**
@@ -86,7 +88,8 @@ class Album extends \yii\db\ActiveRecord
     {
         return [
             'id',
-            'name',
+            'firstname',
+            'lastname',
         ];
     }
 
@@ -96,8 +99,24 @@ class Album extends \yii\db\ActiveRecord
     public function extraFields()
     {
         return [
-            'artists',
+            'albums',
             'tracks',
         ];
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return (int) $this->getPrimaryKey();
+    }
+
+    /**
+     * @return int
+     */
+    public function getType(): int
+    {
+        return self::TYPE_ARTIST;
     }
 }

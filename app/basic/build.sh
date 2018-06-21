@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#composer install --no-interaction --optimize-autoloader --no-progress
+composer install --no-interaction --optimize-autoloader --no-progress
 
 php yii migrate --interactive=0
 

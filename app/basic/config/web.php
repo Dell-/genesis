@@ -12,16 +12,16 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'modules' => [
-        'album' => \app\modules\album\Album::class,
-        'artist' => \app\modules\artist\Artist::class,
-        'genre' => \app\modules\genre\Genre::class,
-        'track' => \app\modules\track\Track::class,
+        'rest' => \app\modules\rest\Rest::class,
     ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'g3R"/Q!{%4<&]3cpk^<}=m_',
             'baseUrl' => '',
+            'parsers' => [
+                'application/json' => \yii\web\JsonParser::class,
+            ]
         ],
         'cache' => [
             'class' => \yii\caching\FileCache::class,

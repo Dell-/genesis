@@ -1,28 +1,30 @@
 <?php
 
-namespace app\modules\genre\models;
+namespace app\models;
 
-use app\modules\track\models\Track;
+use app\spi\FavoriteInterface;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "{{%genre}}".
+ * This is the model class for table "{{%album}}"
  *
  * @property int $id
  * @property string $name
  * @property int $created_at
  * @property int $updated_at
  *
+ * @property Artist[] $artists
  * @property Track[] $tracks
  */
-class Genre extends \yii\db\ActiveRecord
+class Album extends ActiveRecord implements FavoriteInterface
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{%genre}}';
+        return '{{%album}}';
     }
 
     /**
@@ -62,10 +64,19 @@ class Genre extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getArtists()
+    {
+        return $this->hasMany(Artist::class, ['id' => 'artist_id'])
+            ->viaTable('{{%artist_album}}', ['album_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getTracks()
     {
         return $this->hasMany(Track::class, ['id' => 'track_id'])
-            ->viaTable('{{%track_genre}}', ['genre_id' => 'id']);
+            ->viaTable('{{%track_album}}', ['album_id' => 'id']);
     }
 
     /**
@@ -85,7 +96,24 @@ class Genre extends \yii\db\ActiveRecord
     public function extraFields()
     {
         return [
+            'artists',
             'tracks',
         ];
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return (int) $this->getPrimaryKey();
+    }
+
+    /**
+     * @return int
+     */
+    public function getType(): int
+    {
+        return self::TYPE_ALBUM;
     }
 }
