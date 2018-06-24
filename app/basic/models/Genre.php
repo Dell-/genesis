@@ -1,8 +1,9 @@
 <?php
+declare(strict_types = 1);
 
 namespace app\models;
 
-use app\modules\track\models\Track;
+use app\models\elasticsearch\observers\genre\Document;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -23,6 +24,16 @@ class Genre extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return '{{%genre}}';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        $this->on(static::EVENT_AFTER_INSERT, [new Document(), 'index']);
+
+        parent::init();
     }
 
     /**

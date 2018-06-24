@@ -16,7 +16,10 @@ return [
         ],
         'extraPatterns' => [
             'GET <id>/favorites' => 'create-favorite',
+            'DELETE <id>/favorites' => 'remove-favorite',
             'OPTIONS <id>/favorites' => 'options',
+
+            'GET test' => 'test'
         ]
     ],
 ];

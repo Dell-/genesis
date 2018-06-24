@@ -228,7 +228,7 @@
             "description": "Album object",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Album"
+              "$ref": "#/definitions/AlbumRequest"
             }
           }
         ],
@@ -409,7 +409,7 @@
             "description": "Track object",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Track"
+              "$ref": "#/definitions/TrackRequest"
             }
           }
         ],
@@ -590,7 +590,7 @@
             "description": "Genre object",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Genre"
+              "$ref": "#/definitions/GenreRequest"
             }
           }
         ],
@@ -779,6 +779,34 @@
             "description": "Artist not found"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "favorites"
+        ],
+        "summary": "Remove artist from favorites list by id",
+        "operationId": "addArtistFavorites",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of artist for removing from favorites list",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "Artist not found"
+          }
+        }
       }
     },
     "/albums/{id}/favorites": {
@@ -809,6 +837,34 @@
             "description": "Album not found"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "favorites"
+        ],
+        "summary": "Remove album from favorites list by id",
+        "operationId": "addAlbumFavorites",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of album for removing from favorites list",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "Album not found"
+          }
+        }
       }
     },
     "/tracks/{id}/favorites": {
@@ -816,7 +872,7 @@
         "tags": [
           "favorites"
         ],
-        "summary": "Add track to favorites list by id",
+        "summary": "Remove track from favorites list by id",
         "operationId": "addTrackFavorites",
         "produces": [
           "application/json"
@@ -825,7 +881,35 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of track for adding to favorites list",
+            "description": "Id of track for removing from favorites list",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "Track not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "favorites"
+        ],
+        "summary": "Remove track from favorites list by id",
+        "operationId": "addTrackFavorites",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of track for removing from favorites list",
             "required": true,
             "type": "integer",
             "format": "int64"

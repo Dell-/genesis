@@ -15,6 +15,12 @@ $config = [
         '@dump' => '@app/dump',
     ],
     'components' => [
+        'elasticsearch' => [
+            'class' => \app\components\elasticsearch\Client::class,
+            'hosts' => [
+                'http://elasticsearch:9200',
+            ],
+        ],
         'cache' => [
             'class' => \yii\caching\FileCache::class,
         ],

@@ -15,6 +15,12 @@ $config = [
         'rest' => \app\modules\rest\Rest::class,
     ],
     'components' => [
+        'elasticsearch' => [
+            'class' => \app\components\elasticsearch\Client::class,
+            'hosts' => [
+                'http://elasticsearch:9200',
+            ],
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'g3R"/Q!{%4<&]3cpk^<}=m_',

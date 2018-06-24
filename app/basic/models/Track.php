@@ -1,7 +1,9 @@
 <?php
+declare(strict_types = 1);
 
 namespace app\models;
 
+use app\models\elasticsearch\observers\track\Document;
 use app\spi\FavoriteInterface;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -26,6 +28,16 @@ class Track extends ActiveRecord implements FavoriteInterface
     public static function tableName()
     {
         return '{{%track}}';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        $this->on(static::EVENT_AFTER_INSERT, [new Document(), 'index']);
+
+        parent::init();
     }
 
     /**
